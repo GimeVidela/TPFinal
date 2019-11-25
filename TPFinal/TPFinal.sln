@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27428.2037
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TPFinal", "TPFinal\TPFinal.csproj", "{B7F13778-6967-4C0E-AF65-3B11449FAA27}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TP5_Colas", "G:\gimev\Documents\TPs\SIM_Tps_Grupo6\TP5_Colas\TP5_Colas\TP5_Colas.csproj", "{D789E0CB-FE0D-42CE-80B2-0E3E32C8F631}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B7F13778-6967-4C0E-AF65-3B11449FAA27}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B7F13778-6967-4C0E-AF65-3B11449FAA27}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B7F13778-6967-4C0E-AF65-3B11449FAA27}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B7F13778-6967-4C0E-AF65-3B11449FAA27}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D789E0CB-FE0D-42CE-80B2-0E3E32C8F631}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D789E0CB-FE0D-42CE-80B2-0E3E32C8F631}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D789E0CB-FE0D-42CE-80B2-0E3E32C8F631}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D789E0CB-FE0D-42CE-80B2-0E3E32C8F631}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {CA40F0D0-A7B0-4C6C-B695-4D9F0C37A2D0}
+	EndGlobalSection
+EndGlobal

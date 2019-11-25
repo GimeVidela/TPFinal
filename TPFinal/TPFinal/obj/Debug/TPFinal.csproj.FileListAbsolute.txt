@@ -1,0 +1,10 @@
+C:\Users\gimev\source\repos\TPFinal\TPFinal\bin\Debug\TPFinal.exe.config
+C:\Users\gimev\source\repos\TPFinal\TPFinal\bin\Debug\TPFinal.exe
+C:\Users\gimev\source\repos\TPFinal\TPFinal\bin\Debug\TPFinal.pdb
+C:\Users\gimev\source\repos\TPFinal\TPFinal\obj\Debug\TPFinal.csprojResolveAssemblyReference.cache
+C:\Users\gimev\source\repos\TPFinal\TPFinal\obj\Debug\TPFinal.Inicio.resources
+C:\Users\gimev\source\repos\TPFinal\TPFinal\obj\Debug\TPFinal.Properties.Resources.resources
+C:\Users\gimev\source\repos\TPFinal\TPFinal\obj\Debug\TPFinal.csproj.GenerateResource.cache
+C:\Users\gimev\source\repos\TPFinal\TPFinal\obj\Debug\TPFinal.csproj.CoreCompileInputs.cache
+C:\Users\gimev\source\repos\TPFinal\TPFinal\obj\Debug\TPFinal.exe
+C:\Users\gimev\source\repos\TPFinal\TPFinal\obj\Debug\TPFinal.pdb
