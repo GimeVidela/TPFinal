@@ -45,6 +45,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Cabina.cs" />
     <Compile Include="Cajero.cs" />
     <Compile Include="Cliente.cs" />
     <Compile Include="GeneradorNumAleatorios.cs" />
@@ -75,6 +76,9 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="SimulacionAtencionEDEN.resx">
+      <DependentUpon>SimulacionAtencionEDEN.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
