@@ -19,26 +19,28 @@ namespace TPFinal
 
         private void btn_simular_Click(object sender, EventArgs e)
         {
-            if (diasASimular.Text != "" && hor2.Text != "" && min2.Text != "" && seg2.Text != "" && iteraciones.Text != "")
+            if (hor1.Text != "" && min1.Text != "" && seg1.Text != "" && iteraciones.Text != "" && hor2.Text != "" && min2.Text != "" && seg2.Text != "" && iteraciones.Text != "")
             {
-                if (diasASimular.Text.Any(x => !char.IsNumber(x)) || hor2.Text.Any(x => !char.IsNumber(x)) || min2.Text.Any(x => !char.IsNumber(x)) || seg2.Text.Any(x => !char.IsNumber(x)) || iteraciones.Text.Any(x => !char.IsNumber(x)))
+                if (hor1.Text.Any(x => !char.IsNumber(x)) || min1.Text.Any(x => !char.IsNumber(x)) || seg1.Text.Any(x => !char.IsNumber(x)) || hor2.Text.Any(x => !char.IsNumber(x)) || min2.Text.Any(x => !char.IsNumber(x)) || seg2.Text.Any(x => !char.IsNumber(x)) || iteraciones.Text.Any(x => !char.IsNumber(x)))
                 {
                     MessageBox.Show("Solo ingrese valores numéricos");
                 }
                 else
                 {
                     //Validacion de texboxs
-                    int dias = Convert.ToInt32(diasASimular.Text);
+                    int hora1 = Int32.Parse(hor2.Text);
+                    int minu1 = Int32.Parse(min2.Text);
+                    int segu1 = Int32.Parse(seg2.Text);
                     int hora2 = Int32.Parse(hor2.Text);
                     int minu2 = Int32.Parse(min2.Text);
                     int segu2 = Int32.Parse(seg2.Text);
                     long iter = long.Parse(iteraciones.Text);
 
-                    if (dias > 0 && (hora2 >= 0 && hora2 <= 24) && (minu2 >= 0 && minu2 <= 60) && (segu2 >= 0 && segu2 <= 60))
+                    if ((minu1 >= 0 && minu1 <= 60) && (segu1 >= 0 && segu1 <= 60) && (hora2 >= 0 && hora2 <= 24) && (minu2 >= 0 && minu2 <= 60) && (segu2 >= 0 && segu2 <= 60))
                     {
                         if (iter >= 5 && iter <= 500000)
                         {
-                            TimeSpan TiempoASimular = TimeSpan.Parse(dias * 24 + ":" + "0" + ":" + "0");
+                            TimeSpan TiempoASimular = TimeSpan.Parse(hor1.Text + ":" + min1.Text + ":" + seg1.Text);
                             TimeSpan TiempoIniciociclos = TimeSpan.Parse(hor2.Text + ":" + min2.Text + ":" + seg2.Text);
 
                             if (TiempoASimular <= TiempoIniciociclos)
@@ -48,7 +50,7 @@ namespace TPFinal
                             }
                             else
                             {
-                                GestorSimulacion gestor = new GestorSimulacion(Convert.ToInt32(iteraciones.Text), dias, TiempoIniciociclos);
+                                GestorSimulacion gestor = new GestorSimulacion(Convert.ToInt32(iteraciones.Text), TiempoASimular, TiempoIniciociclos);
                                 grillaEstadisticas.DataSource = gestor.SimularVectorEstado();
                                 //ListaCamionesGrilla grillaCamiones = new ListaCamionesGrilla();
                                 //grillaCamiones.cargarGrilla(gestor.cargarTablaCamiones(gestor.listaCamionesAtendidos));

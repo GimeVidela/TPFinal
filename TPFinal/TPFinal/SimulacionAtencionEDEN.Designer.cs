@@ -33,7 +33,6 @@
             this.seg2 = new System.Windows.Forms.TextBox();
             this.min2 = new System.Windows.Forms.TextBox();
             this.hor2 = new System.Windows.Forms.TextBox();
-            this.diasASimular = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
@@ -43,13 +42,18 @@
             this.btn_simular = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.grillaEstadisticas = new System.Windows.Forms.DataGridView();
+            this.label6 = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
+            this.seg1 = new System.Windows.Forms.TextBox();
+            this.min1 = new System.Windows.Forms.TextBox();
+            this.hor1 = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.grillaEstadisticas)).BeginInit();
             this.SuspendLayout();
             // 
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(555, 34);
+            this.label8.Location = new System.Drawing.Point(573, 33);
             this.label8.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(10, 13);
@@ -59,7 +63,7 @@
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(519, 33);
+            this.label9.Location = new System.Drawing.Point(537, 32);
             this.label9.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(10, 13);
@@ -68,7 +72,7 @@
             // 
             // seg2
             // 
-            this.seg2.Location = new System.Drawing.Point(569, 31);
+            this.seg2.Location = new System.Drawing.Point(587, 30);
             this.seg2.Margin = new System.Windows.Forms.Padding(2);
             this.seg2.Name = "seg2";
             this.seg2.Size = new System.Drawing.Size(19, 20);
@@ -76,7 +80,7 @@
             // 
             // min2
             // 
-            this.min2.Location = new System.Drawing.Point(533, 31);
+            this.min2.Location = new System.Drawing.Point(551, 30);
             this.min2.Margin = new System.Windows.Forms.Padding(2);
             this.min2.Name = "min2";
             this.min2.Size = new System.Drawing.Size(19, 20);
@@ -84,24 +88,16 @@
             // 
             // hor2
             // 
-            this.hor2.Location = new System.Drawing.Point(497, 31);
+            this.hor2.Location = new System.Drawing.Point(515, 30);
             this.hor2.Margin = new System.Windows.Forms.Padding(2);
             this.hor2.Name = "hor2";
             this.hor2.Size = new System.Drawing.Size(19, 20);
             this.hor2.TabIndex = 53;
             // 
-            // diasASimular
-            // 
-            this.diasASimular.Location = new System.Drawing.Point(101, 31);
-            this.diasASimular.Margin = new System.Windows.Forms.Padding(2);
-            this.diasASimular.Name = "diasASimular";
-            this.diasASimular.Size = new System.Drawing.Size(55, 20);
-            this.diasASimular.TabIndex = 51;
-            // 
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(403, 34);
+            this.label5.Location = new System.Drawing.Point(421, 33);
             this.label5.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(90, 13);
@@ -111,7 +107,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(185, 34);
+            this.label4.Location = new System.Drawing.Point(217, 32);
             this.label4.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(105, 13);
@@ -130,7 +126,7 @@
             // 
             // iteraciones
             // 
-            this.iteraciones.Location = new System.Drawing.Point(294, 31);
+            this.iteraciones.Location = new System.Drawing.Point(326, 29);
             this.iteraciones.Margin = new System.Windows.Forms.Padding(2);
             this.iteraciones.Name = "iteraciones";
             this.iteraciones.Size = new System.Drawing.Size(91, 20);
@@ -155,7 +151,7 @@
             // 
             // btn_simular
             // 
-            this.btn_simular.Location = new System.Drawing.Point(610, 29);
+            this.btn_simular.Location = new System.Drawing.Point(628, 28);
             this.btn_simular.Name = "btn_simular";
             this.btn_simular.Size = new System.Drawing.Size(75, 23);
             this.btn_simular.TabIndex = 56;
@@ -186,11 +182,60 @@
             this.grillaEstadisticas.Size = new System.Drawing.Size(1015, 519);
             this.grillaEstadisticas.TabIndex = 66;
             // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(159, 33);
+            this.label6.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(10, 13);
+            this.label6.TabIndex = 71;
+            this.label6.Text = ":";
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(123, 32);
+            this.label7.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(10, 13);
+            this.label7.TabIndex = 70;
+            this.label7.Text = ":";
+            // 
+            // seg1
+            // 
+            this.seg1.Location = new System.Drawing.Point(173, 30);
+            this.seg1.Margin = new System.Windows.Forms.Padding(2);
+            this.seg1.Name = "seg1";
+            this.seg1.Size = new System.Drawing.Size(19, 20);
+            this.seg1.TabIndex = 69;
+            // 
+            // min1
+            // 
+            this.min1.Location = new System.Drawing.Point(137, 30);
+            this.min1.Margin = new System.Windows.Forms.Padding(2);
+            this.min1.Name = "min1";
+            this.min1.Size = new System.Drawing.Size(19, 20);
+            this.min1.TabIndex = 68;
+            // 
+            // hor1
+            // 
+            this.hor1.Location = new System.Drawing.Point(101, 30);
+            this.hor1.Margin = new System.Windows.Forms.Padding(2);
+            this.hor1.Name = "hor1";
+            this.hor1.Size = new System.Drawing.Size(19, 20);
+            this.hor1.TabIndex = 67;
+            // 
             // SimulacionAtencionEDEN
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1041, 619);
+            this.Controls.Add(this.label6);
+            this.Controls.Add(this.label7);
+            this.Controls.Add(this.seg1);
+            this.Controls.Add(this.min1);
+            this.Controls.Add(this.hor1);
             this.Controls.Add(this.grillaEstadisticas);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.label8);
@@ -198,7 +243,6 @@
             this.Controls.Add(this.seg2);
             this.Controls.Add(this.min2);
             this.Controls.Add(this.hor2);
-            this.Controls.Add(this.diasASimular);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
@@ -221,7 +265,6 @@
         private System.Windows.Forms.TextBox seg2;
         private System.Windows.Forms.TextBox min2;
         private System.Windows.Forms.TextBox hor2;
-        private System.Windows.Forms.TextBox diasASimular;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label3;
@@ -231,5 +274,10 @@
         private System.Windows.Forms.Button btn_simular;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.DataGridView grillaEstadisticas;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.TextBox seg1;
+        private System.Windows.Forms.TextBox min1;
+        private System.Windows.Forms.TextBox hor1;
     }
 }
