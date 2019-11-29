@@ -8,7 +8,7 @@ namespace TPFinal
 {
     class Cabina
     {
-        private GeneradorNumAleatorios generador;
+        private GeneradorNumAleatorios generador = new GeneradorNumAleatorios();
         public string estado = "Libre";
         private Cliente clienteSiendoAtendido;
 

@@ -53,9 +53,7 @@ namespace TPFinal
                                 //ListaCamionesGrilla grillaCamiones = new ListaCamionesGrilla();
                                 //grillaCamiones.cargarGrilla(gestor.cargarTablaCamiones(gestor.listaCamionesAtendidos));
                                 //grillaCamiones.Show();
-                                //txtColaMax.Text = Convert.ToString(gestor.sumTiempoPredioCamion);
-
-                                //ListaCamionesGrilla grillaCamiones2 = new ListaCamionesGrilla();
+                                txtColaMax.Text = Convert.ToString(gestor.colaMax);
                             }
                         }
                         else
