@@ -1,0 +1,38 @@
+Inicio de la simulacion:
+
+Reloj: 00:00:00
+Evento: Inicio
+Cliente: 0 / Vacio
+Proximo Cliente: Ultimo Cliente llegado +1
+Proxima Llegada:Se calcula con la funcion de exponencial negativa
+Aleatorio Llegada: Mostrar Aleatorio
+Tipo de cliente A: Mostrar Tipo de cliente segun la llegada, SI aleatorio <0.2 = "Mira y se va", SINO = "Para Atencion"
+
+Cola: 0
+ColaMaxima: 0
+
+Cajero 1/ Cajero 2: 
+Estado: Libre
+Cliente Atendiendo : 0
+Proximo Fin de Atencion: 0
+Aleatorio Tipo de cliente en atencion: 0
+Tipo de Cliente en atendion: 0
+
+Cabina: 
+Cliente Atendiendo : 0
+Proximo Fin de Escuchando: 0
+Aleatorio Tipo de cliente en atencion: 0
+Tipo de Cliente en atendion: 0
+
+Comienzo de la simulacion:
+
+Reloj: Calcular tiempo minimo entre Proxima llegada, proximo fina atencion C1 y C2 , proximo fin escuchando
+Evento: SI el reloj = proximallegada : se verifica q tipo de cliente es se va a atencion se suma a la cola de atencion
+					-> si los servidores estan libres se ocupa uno estado del cajero1 ocupado, la cola se mantiene en cero, se calcula q tipo de cliente si compra o escucha
+				    	-> si un servidor esta libre se ocupa si estado cajero 2 ocupado,la cola se mantiene en cero, se calcula q tipo de cliente si compra o escucha
+					-> si los servidores estan ocupados los clientes empiezan a hacer cola (lacolaseaumenta en uno a medida q llegan los clientes)
+	
+	SI el reloj = proximoFinAtencion cajero 1/2: se verifica q tipo de cliente es si es "compra definitiva" el cliente sale del sistema, si "va a cabina" el cliente pasa a cabina de ambas formas el 
+							cajero queda en esta libre si no hay clientes en cola de atencion si hay clientes pasa a atende a proximo cliente que se elimina de la cola y el cajero sigue ocupado
+	
+	SI el reloj = ProximoFinEscuchandoCabina: se vrifica que tipo de cliente es si es cliente "Compra" se vuelve a sumar a la cola de atencion si ha clientes esperando sino hay es atendido por algun cajero libre 
