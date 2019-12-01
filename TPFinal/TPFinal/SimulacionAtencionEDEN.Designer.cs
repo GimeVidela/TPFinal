@@ -76,7 +76,7 @@
             this.seg2.Margin = new System.Windows.Forms.Padding(2);
             this.seg2.Name = "seg2";
             this.seg2.Size = new System.Drawing.Size(19, 20);
-            this.seg2.TabIndex = 55;
+            this.seg2.TabIndex = 58;
             // 
             // min2
             // 
@@ -84,7 +84,7 @@
             this.min2.Margin = new System.Windows.Forms.Padding(2);
             this.min2.Name = "min2";
             this.min2.Size = new System.Drawing.Size(19, 20);
-            this.min2.TabIndex = 54;
+            this.min2.TabIndex = 57;
             // 
             // hor2
             // 
@@ -92,7 +92,7 @@
             this.hor2.Margin = new System.Windows.Forms.Padding(2);
             this.hor2.Name = "hor2";
             this.hor2.Size = new System.Drawing.Size(19, 20);
-            this.hor2.TabIndex = 53;
+            this.hor2.TabIndex = 56;
             // 
             // label5
             // 
@@ -130,14 +130,14 @@
             this.iteraciones.Margin = new System.Windows.Forms.Padding(2);
             this.iteraciones.Name = "iteraciones";
             this.iteraciones.Size = new System.Drawing.Size(91, 20);
-            this.iteraciones.TabIndex = 52;
+            this.iteraciones.TabIndex = 55;
             // 
             // txtColaMax
             // 
             this.txtColaMax.Location = new System.Drawing.Point(88, 64);
             this.txtColaMax.Name = "txtColaMax";
             this.txtColaMax.Size = new System.Drawing.Size(94, 20);
-            this.txtColaMax.TabIndex = 59;
+            this.txtColaMax.TabIndex = 61;
             this.txtColaMax.Text = "Nro";
             // 
             // label2
@@ -154,7 +154,7 @@
             this.btn_simular.Location = new System.Drawing.Point(628, 28);
             this.btn_simular.Name = "btn_simular";
             this.btn_simular.Size = new System.Drawing.Size(75, 23);
-            this.btn_simular.TabIndex = 56;
+            this.btn_simular.TabIndex = 60;
             this.btn_simular.Text = "Simular";
             this.btn_simular.UseVisualStyleBackColor = true;
             this.btn_simular.Click += new System.EventHandler(this.btn_simular_Click);
@@ -208,7 +208,7 @@
             this.seg1.Margin = new System.Windows.Forms.Padding(2);
             this.seg1.Name = "seg1";
             this.seg1.Size = new System.Drawing.Size(19, 20);
-            this.seg1.TabIndex = 69;
+            this.seg1.TabIndex = 54;
             // 
             // min1
             // 
@@ -216,7 +216,7 @@
             this.min1.Margin = new System.Windows.Forms.Padding(2);
             this.min1.Name = "min1";
             this.min1.Size = new System.Drawing.Size(19, 20);
-            this.min1.TabIndex = 68;
+            this.min1.TabIndex = 53;
             // 
             // hor1
             // 
@@ -224,7 +224,7 @@
             this.hor1.Margin = new System.Windows.Forms.Padding(2);
             this.hor1.Name = "hor1";
             this.hor1.Size = new System.Drawing.Size(19, 20);
-            this.hor1.TabIndex = 67;
+            this.hor1.TabIndex = 52;
             // 
             // SimulacionAtencionEDEN
             // 
