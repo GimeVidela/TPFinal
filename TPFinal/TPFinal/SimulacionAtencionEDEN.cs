@@ -52,9 +52,9 @@ namespace TPFinal
                             {
                                 GestorSimulacion gestor = new GestorSimulacion(Convert.ToInt32(iteraciones.Text), TiempoASimular, TiempoIniciociclos);
                                 grillaEstadisticas.DataSource = gestor.SimularVectorEstado();
-                                //ListaCamionesGrilla grillaCamiones = new ListaCamionesGrilla();
-                                //grillaCamiones.cargarGrilla(gestor.cargarTablaCamiones(gestor.listaCamionesAtendidos));
-                                //grillaCamiones.Show();
+                                ListaClienteEstados grillaClientes = new ListaClienteEstados();
+                                grillaClientes.cargarGrilla(gestor.cargarTablaClientes(gestor.listaClientes));
+                                grillaClientes.Show();
                                 txtColaMax.Text = Convert.ToString(gestor.colaMax);
                             }
                         }

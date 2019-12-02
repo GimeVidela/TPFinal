@@ -54,7 +54,7 @@ namespace TPFinal
         string clienteSiendoAtendidoEnC2 = "";
         string clienteEscuchandoCabina = "";
 
-        //List<Camion> listaCamiones = new List<Camion>();
+        public List<Cliente> listaClientes = new List<Cliente>();
         Boolean servicioRealizado = false;
 
         // colas
@@ -121,17 +121,7 @@ namespace TPFinal
             }
             while (IteracionesCompletadas == false && tiempoASimular >= tiempoSimulado)
             {
-
                 Simulacion();
-                //resultados.Add(SimulacionDia(dia));
-                //int auxiliarContador = resultados.LastOrDefault().Item1;
-                //totalCamionesAtendidosGlobal += auxiliarContador;
-
-                //int auxiliarContadorNoAtendidos = resultados.LastOrDefault().Item2;
-                //totalCamionesNoAtendidosGlobal += auxiliarContadorNoAtendidos;
-                //dia++;
-
-
             }
             if (contadorDeIteracionesRealizadas < iteraciones-1)
             {
@@ -194,7 +184,7 @@ namespace TPFinal
             {
                 proximaFinAtencionC1 = reloj + caj1.TiempoAtencionCajero();
                 caj1.setClienteSiendoAtendido(colaCajeros.Dequeue());
-                //caj1.getClienteSiendoAtendido().agregarEstado("Atención Cajero 1", reloj);
+                caj1.getClienteSiendoAtendido().agregarEstado("Atención Cajero 1", reloj);
                 ultimoCliente = caj1.getClienteSiendoAtendido();
                 caj1.estado = "Ocupado";
                 if (caj1.getClienteSiendoAtendido().calcularClienteB() == 4)
@@ -202,10 +192,8 @@ namespace TPFinal
                     //calcular tipo cliente si es 3 o 4
 
                     tipoDeClienteUltimoBC1 = "Para Escuchar";
-                    colaCabina.Enqueue(caj1.getClienteSiendoAtendido());
-                    colaCabina.Last().setGenerador(ref GeneradorUnico);
-
-                    //proximaFinCabina = reloj + Cab.TiempoEscuchandoCabina(4, 1);
+                    //colaCabina.Enqueue(caj1.getClienteSiendoAtendido());
+                    //colaCabina.Last().setGenerador(ref GeneradorUnico);
                 }
                 else
                 {
@@ -216,7 +204,7 @@ namespace TPFinal
             {
                 proximaFinAtencionC2 = reloj + caj2.TiempoAtencionCajero();
                 caj2.setClienteSiendoAtendido(colaCajeros.Dequeue());
-                //caj2.getClienteSiendoAtendido().agregarEstado("Atención Cajero 2", reloj);
+                caj2.getClienteSiendoAtendido().agregarEstado("Atención Cajero 2", reloj);
                 ultimoCliente = caj2.getClienteSiendoAtendido();
                 caj2.estado = "Ocupado";
                 if (caj2.getClienteSiendoAtendido().calcularClienteB() == 4)
@@ -224,9 +212,8 @@ namespace TPFinal
                     //calcular tipo cliente si es 3 o 4
 
                     tipoDeClienteUltimoBC2 = "Para Escuchar";
-                    colaCabina.Enqueue(caj2.getClienteSiendoAtendido());
-                    colaCabina.Last().setGenerador(ref GeneradorUnico);
-                    //proximaFinCabina = reloj + Cab.TiempoEscuchandoCabina(4, 1);
+                    //colaCabina.Enqueue(caj2.getClienteSiendoAtendido());
+                    //colaCabina.Last().setGenerador(ref GeneradorUnico);
                 }
                 else
                 {
@@ -246,14 +233,14 @@ namespace TPFinal
                     colaCajeros.Enqueue(ultimoCliente);
                     colaCajeros.Last().setGenerador(ref GeneradorUnico);
                     ultimoCliente = colaCajeros.Last();
-                    proximaFinCabina = seteoDeProximos;
+                    //proximaFinCabina = seteoDeProximos;
                     //servicioRealizado = true;
                     Cab.setClienteSiendoAtendido(ningunCliente);
-                    tipoDeClienteUltimoC = "Escucha y Compra";
+                    tipoDeClienteUltimoC = "Compra";
                 }
                 else
                 {
-                    tipoDeClienteUltimoC = "Escucha y No Compra";
+                    tipoDeClienteUltimoC = "No Compra";
                 }
             }
 
@@ -274,6 +261,8 @@ namespace TPFinal
                 servicioRealizado = true;
                 //estadoSimulacion = "Llegada Cliente";
                 ultimoCliente = new Cliente(contadorDeClientes);
+                listaClientes.Add(ultimoCliente);
+
                 contadorDeClientes++;
                 proximaLlegadaCliente = seteoDeProximos;
                 if (ultimoCliente.calcularClienteA() == 2)
@@ -282,7 +271,7 @@ namespace TPFinal
                     colaCajeros.Last().setGenerador(ref GeneradorUnico);
 
                     ultimoCliente = colaCajeros.Last();
-                    //colaCajeros.Last().agregarEstado("En Cola Atención", reloj);
+                    colaCajeros.Last().agregarEstado("En Cola Atención", reloj);
                     tipoDeClienteUltimoA = "Para Atención";
                 }
                 else
@@ -299,12 +288,17 @@ namespace TPFinal
                 estadoSimulacion = "Fin Atención Cajero 1";
                 //caj1.estado = "Libre";
                 //proximaFinAtencionC1 = seteoDeProximos;
-                //caj1.getClienteSiendoAtendido().agregarEstado("Fin Atención Cajero 1", reloj);
+                caj1.getClienteSiendoAtendido().agregarEstado("Fin Atención Cajero 1", reloj);
                 servicioRealizado = true;
-                caj1.setClienteSiendoAtendido(ningunCliente);
+                //caj1.setClienteSiendoAtendido(ningunCliente);
                 //proximaFinAtencionC1 = reloj + caj1.TiempoAtencionCajero();
                 proximaFinAtencionC1 = seteoDeProximos;
                 caj1.estado = "Libre";
+                if (tipoDeClienteUltimoBC1 == "Para Escuchar")
+                {
+                    colaCabina.Enqueue(caj1.getClienteSiendoAtendido());
+                    colaCabina.Last().setGenerador(ref GeneradorUnico);
+                }
             }
             if (tiempoMinimo == proximaFinAtencionC2  && servicioRealizado == false)
             {
@@ -313,12 +307,17 @@ namespace TPFinal
                 estadoSimulacion = "Fin Atención Cajero 2";
                 //caj2.estado = "Libre";
                 //proximaFinAtencionC2 = seteoDeProximos;
-                //caj2.getClienteSiendoAtendido().agregarEstado("Fin Atención Cajero 2", reloj);
+                caj2.getClienteSiendoAtendido().agregarEstado("Fin Atención Cajero 2", reloj);
                 servicioRealizado = true;
-                caj2.setClienteSiendoAtendido(ningunCliente);
+                //caj2.setClienteSiendoAtendido(ningunCliente);
                 //proximaFinAtencionC2 = reloj + caj2.TiempoAtencionCajero();
                 proximaFinAtencionC2 = seteoDeProximos;
                 caj2.estado = "Libre";
+                if (tipoDeClienteUltimoBC2 == "Para Escuchar")
+                {
+                    colaCabina.Enqueue(caj2.getClienteSiendoAtendido());
+                    colaCabina.Last().setGenerador(ref GeneradorUnico);
+                }
             }
 
             if (tiempoMinimo == proximaFinCabina && servicioRealizado == false)
@@ -326,7 +325,7 @@ namespace TPFinal
 
                 reloj = proximaFinCabina;
                 estadoSimulacion = "Fin Escuchando en Cabina";
-                //Cab.getClienteSiendoAtendido().agregarEstado("Fin Escuchando en Cabina", reloj);
+                Cab.getClienteSiendoAtendido().agregarEstado("Fin Escuchando en Cabina", reloj);
                 servicioRealizado = true;
                 ultimoCliente = Cab.getClienteSiendoAtendido();
                 proximaFinCabina = seteoDeProximos;
@@ -344,8 +343,8 @@ namespace TPFinal
         private TimeSpan llegadaCliente(double lambda)
         {
             //Distribucion Exponencial Negativa
-
-            double aleatorio = GeneradorUnico.GenerarAleatorio();
+            GeneradorNumAleatorios gen = new GeneradorNumAleatorios();
+            double aleatorio = gen.GenerarAleatorio();
 
             double tiempoLlegada = ((-lambda) * Math.Log(1 - aleatorio));
 
@@ -507,6 +506,24 @@ namespace TPFinal
                 }
                 return cadena;
             }
+        }
+
+        public DataTable cargarTablaClientes(List<Cliente> lista)
+        {
+            //tablaClientes.Columns.Add("Estado de Cliente");
+            //tablaClientes.Columns.Add("Reloj");
+            foreach (Cliente i in lista)
+            {
+                tablaClientes.Columns.Add("Estado de Cliente " + i.numeroCliente);
+                tablaClientes.Columns.Add("Reloj "+ i.numeroCliente);
+                tablaClientes.Rows.Add("Estado de Cliente " + i.numeroCliente, "Reloj");
+                for (int j = 0; j < i.conocerEstados().Item1.Count; j++)
+                {
+                    tablaClientes.Rows.Add(i.conocerEstados().Item1[j], i.conocerEstados().Item2[j]);
+                }
+                tablaClientes.Rows.Add("", "");
+            }
+            return tablaClientes;
         }
     }
 }
