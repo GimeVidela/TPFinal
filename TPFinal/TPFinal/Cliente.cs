@@ -148,5 +148,10 @@ namespace TPFinal
             }
             return tipoCliente;
         }
+        public TimeSpan TiempoMirando()
+        {
+            TimeSpan mirando = new TimeSpan(0, 3, 0);
+            return mirando;
+        }
     }
 }
