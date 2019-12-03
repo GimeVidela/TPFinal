@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace TPFinal
@@ -51,22 +52,28 @@ namespace TPFinal
             this.generador = generador;
            
         }
-        public void setHoraLlegada(TimeSpan horaLlegadaCamion)
+        public void setHoraLlegada(TimeSpan horaLlegadaCliente)
         {
-            this.horaLlegada = horaLlegadaCamion;
+            this.horaLlegada = horaLlegadaCliente;
+        }
+        public void setHoraSalida(TimeSpan horaSalidaCliente)
+        {
+            this.horaSalida = horaSalidaCliente;
         }
 
+        public TimeSpan getHoraLlegada()
+        {
+            return horaLlegada;
+        }
+        public TimeSpan getHoraSalida()
+        {
+            return horaSalida;
+        }
 
         public Cliente(int numeroCliente = 0)
         {
             this.numeroCliente = numeroCliente;
 
-        }
-
-
-        public void setHoraSalida(TimeSpan hora)
-        {
-            horaSalida = hora;
         }
 
         //public TimeSpan TioempoAdentro()
@@ -98,6 +105,9 @@ namespace TPFinal
 
         public int calcularClienteA()
         {
+            Thread.Sleep(11);
+
+
             this.aleatorio = Math.Round(generador.GenerarAleatorio(), 3);
             
             if (aleatorio < 0.20)

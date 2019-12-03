@@ -40,7 +40,7 @@ namespace TPFinal
         int contadorDeIteraciones;
         TimeSpan tiempoSimulado;
         TimeSpan relojAnterior;
-        Cliente ultimoCliente;
+        Cliente ultimoCliente = new Cliente();
         Cliente ningunCliente = new Cliente();
 
         int contadorDeIteracionesRealizadas = 0;
@@ -129,6 +129,7 @@ namespace TPFinal
             }
             //sumTiempoPredioCamion = calcularPromedio(listaCamionesAtendidos);
 
+            //AgregarClienteEstados();
             return vectorEstado;
         }
 
@@ -166,6 +167,16 @@ namespace TPFinal
 
         }
 
+        //public void AgregarClienteEstados()
+        //{
+        //    for (int i = 0; i < contadorDeClientes; i++)
+        //    {
+        //        vectorEstado.Columns.Add("Estado Cliente " + i);
+        //        vectorEstado.Columns.Add("Hora Llegada Cliente " + i);
+        //        vectorEstado.Columns.Add("HoraSalida Cliente " + i);
+        //    }
+        //    vectorEstado.Rows[2][26] = "";
+        //}
         public int Simulacion()
         {
             // determinacion de eventos en el sistema
@@ -176,6 +187,7 @@ namespace TPFinal
             if (estadoSimulacion == "Llegada Cliente")
             {
                 proximaLlegadaCliente = reloj + llegadaCliente(2.0);
+                
                 //reloj = proximaLlegadaCliente;
             }
 
@@ -184,7 +196,7 @@ namespace TPFinal
             {
                 proximaFinAtencionC1 = reloj + caj1.TiempoAtencionCajero();
                 caj1.setClienteSiendoAtendido(colaCajeros.Dequeue());
-                caj1.getClienteSiendoAtendido().agregarEstado("Atención Cajero 1", reloj);
+                caj1.getClienteSiendoAtendido().agregarEstado("En Atención Cajero 1", reloj);
                 ultimoCliente = caj1.getClienteSiendoAtendido();
                 caj1.estado = "Ocupado";
                 if (caj1.getClienteSiendoAtendido().calcularClienteB() == 4)
@@ -204,7 +216,7 @@ namespace TPFinal
             {
                 proximaFinAtencionC2 = reloj + caj2.TiempoAtencionCajero();
                 caj2.setClienteSiendoAtendido(colaCajeros.Dequeue());
-                caj2.getClienteSiendoAtendido().agregarEstado("Atención Cajero 2", reloj);
+                caj2.getClienteSiendoAtendido().agregarEstado("En Atención Cajero 2", reloj);
                 ultimoCliente = caj2.getClienteSiendoAtendido();
                 caj2.estado = "Ocupado";
                 if (caj2.getClienteSiendoAtendido().calcularClienteB() == 4)
@@ -256,10 +268,13 @@ namespace TPFinal
 
             if (tiempoMinimo == proximaLlegadaCliente && servicioRealizado == false)
             {
+
                 reloj = proximaLlegadaCliente;
                 estadoSimulacion = "Llegada Cliente";
                 servicioRealizado = true;
                 //estadoSimulacion = "Llegada Cliente";
+                ultimoCliente.agregarEstado("Llegado", reloj);
+                ultimoCliente.setHoraLlegada(reloj);
                 ultimoCliente = new Cliente(contadorDeClientes);
                 listaClientes.Add(ultimoCliente);
 
@@ -484,7 +499,35 @@ namespace TPFinal
                                            , proximaFinCabina
                                            , Cab.getClienteSiendoAtendido().getTipoAleatorio3()
                                            , tipoDeClienteUltimoC
-                                            );
+                                           );
+                        vectorEstado.Columns.Add("Estado Cliente " + ultimoCliente.numeroCliente);
+                        vectorEstado.Columns.Add("Hora Llegada Cliente " + ultimoCliente.numeroCliente);
+                        vectorEstado.Columns.Add("HoraSalida Cliente " + ultimoCliente.numeroCliente);
+                    for (int i = 0; i < contadorDeClientes-1; i++)
+                    {
+                        int m = 1;
+                        for (int j = 26; j < vectorEstado.Columns.Count; j=j+3)
+                        {
+                            for (int k = 0; k < ultimoCliente.conocerEstados().Item1.Count; k++)
+                            {
+                                if (Convert.ToString( reloj) == ultimoCliente.conocerEstados().Item2[k])
+                                {
+                                    vectorEstado.Rows[m][j] = ultimoCliente.conocerEstados().Item1[k];
+                                }
+                                else { vectorEstado.Rows[m][j] = ""; }
+                            }
+
+                            if (reloj >= ultimoCliente.getHoraLlegada())
+                            { vectorEstado.Rows[m][j+1] = ultimoCliente.getHoraLlegada(); }
+                            else { vectorEstado.Rows[m][j+1] = ""; }
+
+                            if (reloj >= ultimoCliente.getHoraSalida())
+                            { vectorEstado.Rows[m][j+2] = ultimoCliente.getHoraSalida(); }
+                            else { vectorEstado.Rows[m][j + 2] = ""; }
+                            m++;
+                        }
+
+                    }
                 }
                 contadorDeIteracionesRealizadas++;
             }
