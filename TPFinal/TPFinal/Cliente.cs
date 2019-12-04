@@ -107,7 +107,6 @@ namespace TPFinal
         {
             Thread.Sleep(11);
 
-
             this.aleatorio = Math.Round(generador.GenerarAleatorio(), 3);
             
             if (aleatorio < 0.20)

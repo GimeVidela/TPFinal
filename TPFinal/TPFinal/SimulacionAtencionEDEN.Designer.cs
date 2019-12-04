@@ -49,6 +49,8 @@
             this.hor1 = new System.Windows.Forms.TextBox();
             this.label10 = new System.Windows.Forms.Label();
             this.txtPromCola = new System.Windows.Forms.TextBox();
+            this.label11 = new System.Windows.Forms.Label();
+            this.tbxRTACajero = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.grillaEstadisticas)).BeginInit();
             this.SuspendLayout();
             // 
@@ -138,7 +140,7 @@
             // 
             this.txtColaMax.Location = new System.Drawing.Point(88, 64);
             this.txtColaMax.Name = "txtColaMax";
-            this.txtColaMax.Size = new System.Drawing.Size(94, 20);
+            this.txtColaMax.Size = new System.Drawing.Size(32, 20);
             this.txtColaMax.TabIndex = 61;
             this.txtColaMax.Text = "Nro";
             // 
@@ -231,7 +233,7 @@
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(203, 67);
+            this.label10.Location = new System.Drawing.Point(126, 67);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(182, 13);
             this.label10.TabIndex = 72;
@@ -239,17 +241,36 @@
             // 
             // txtPromCola
             // 
-            this.txtPromCola.Location = new System.Drawing.Point(391, 64);
+            this.txtPromCola.Location = new System.Drawing.Point(314, 64);
             this.txtPromCola.Name = "txtPromCola";
-            this.txtPromCola.Size = new System.Drawing.Size(100, 20);
+            this.txtPromCola.Size = new System.Drawing.Size(71, 20);
             this.txtPromCola.TabIndex = 73;
             this.txtPromCola.Text = "Prom.";
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(391, 67);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(174, 13);
+            this.label11.TabIndex = 74;
+            this.label11.Text = "En necesario agregar más Cajeros?";
+            // 
+            // tbxRTACajero
+            // 
+            this.tbxRTACajero.Location = new System.Drawing.Point(571, 64);
+            this.tbxRTACajero.Name = "tbxRTACajero";
+            this.tbxRTACajero.Size = new System.Drawing.Size(459, 20);
+            this.tbxRTACajero.TabIndex = 75;
+            this.tbxRTACajero.Text = "Rta";
             // 
             // SimulacionAtencionEDEN
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1041, 619);
+            this.Controls.Add(this.tbxRTACajero);
+            this.Controls.Add(this.label11);
             this.Controls.Add(this.txtPromCola);
             this.Controls.Add(this.label10);
             this.Controls.Add(this.label6);
@@ -302,5 +323,7 @@
         private System.Windows.Forms.TextBox hor1;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.TextBox txtPromCola;
+        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.TextBox tbxRTACajero;
     }
 }

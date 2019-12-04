@@ -18,6 +18,7 @@ namespace TPFinal
         Cajero caj2 = new Cajero();
         Cabina Cab = new Cabina();
         Cliente cl = new Cliente();
+        Mirando mirar = new Mirando();
         public int colaMax = 0;
 
         TimeSpan reloj = new TimeSpan(0, 0, 0);
@@ -32,7 +33,7 @@ namespace TPFinal
         TimeSpan tiempoEnCola = new TimeSpan(0, 0, 0);
         TimeSpan sumTiempoEnCola = new TimeSpan(0, 0, 0);
         public TimeSpan promTiempoEnCola = new TimeSpan(0, 0, 0);
-
+        TimeSpan promTCIter = new TimeSpan(0, 0, 0);
         TimeSpan tiempoASimular;
         TimeSpan tiempoDeComienzoDeIteraciones;
         int iteraciones;
@@ -45,7 +46,12 @@ namespace TPFinal
         int contadorDeIteraciones;
         TimeSpan tiempoSimulado;
         TimeSpan relojAnterior;
+        Cliente ultimoClienteMirando = new Cliente();
+        Cliente ultimoClienteAtenC1 = new Cliente();
+        Cliente ultimoClienteAtenC2 = new Cliente();
+        Cliente ultimoClienteCab = new Cliente();
         Cliente ultimoCliente = new Cliente();
+
         Cliente ningunCliente = new Cliente();
 
         int contadorDeIteracionesRealizadas = 0;
@@ -66,7 +72,7 @@ namespace TPFinal
 
         Queue<Cliente> colaCajeros = new Queue<Cliente>();
         Queue<Cliente> colaCabina = new Queue<Cliente>();
-
+        Queue<Cliente> colaMirando = new Queue<Cliente>();
 
         // bandera de simulacion de inicio de simulacion
         string estadoSimulacion = "Llegada Cliente";
@@ -194,6 +200,7 @@ namespace TPFinal
             // Cuando llega un cliente y es para atencion se suma en cola
             servicioRealizado = false;
             relojAnterior = reloj;
+            double prom = 0.0;
 
             if (estadoSimulacion == "Llegada Cliente")
             {
@@ -207,11 +214,11 @@ namespace TPFinal
             {
                 proximaFinAtencionC1 = reloj + caj1.TiempoAtencionCajero();
                 caj1.setClienteSiendoAtendido(colaCajeros.Dequeue());
-                ultimoCliente = caj1.getClienteSiendoAtendido();
-                ultimoCliente.agregarEstado("En Atención Cajero 1", reloj);
-                tiempoEnCola= ultimoCliente.CalcularTiempoEnCola(ultimoCliente.getHoraLlegada(), reloj);
+                ultimoClienteAtenC1 = caj1.getClienteSiendoAtendido();
+                ultimoClienteAtenC1.agregarEstado("En Atención Cajero 1", reloj);
+                tiempoEnCola= ultimoClienteAtenC1.CalcularTiempoEnCola(ultimoClienteAtenC1.getHoraLlegada(), reloj);
                 caj1.estado = "Ocupado";
-                if (ultimoCliente.calcularClienteB() == 4 && compra == false)
+                if (ultimoClienteAtenC1.calcularClienteB() == 4 && compra == false)
                 {
                     //calcular tipo cliente si es 3 o 4
 
@@ -222,18 +229,28 @@ namespace TPFinal
                 else
                 {
                     tipoDeClienteUltimoBC1 = "Compra Definitiva";
-                    ultimoCliente.setHoraSalida(proximaFinAtencionC1);
+                    ultimoClienteAtenC1.setHoraSalida(proximaFinAtencionC1);
                 }                
             }
+            if (colaMirando.Count != 0 )//&& mirar.estado =="Libre")
+            {
+                //proximoFinMirar = reloj + ultimoClienteMirando.TiempoMirando();
+                mirar.setClienteMirando(colaMirando.Dequeue());
+                ultimoClienteMirando = mirar.getClienteMirando();
+                ultimoClienteMirando.agregarEstado("Mirando", reloj);
+                proximoFinMirar = reloj + ultimoClienteMirando.TiempoMirando();
+                //mirar.estado = "Ocupado";
+            }
+
             if (colaCajeros.Count != 0 && caj2.estado == "Libre")
             {
                 proximaFinAtencionC2 = reloj + caj2.TiempoAtencionCajero();
                 caj2.setClienteSiendoAtendido(colaCajeros.Dequeue());
-                ultimoCliente = caj2.getClienteSiendoAtendido();
-                ultimoCliente.agregarEstado("En Atención Cajero 2", reloj);
-                tiempoEnCola= ultimoCliente.CalcularTiempoEnCola(ultimoCliente.getHoraLlegada(), reloj);
+                ultimoClienteAtenC2 = caj2.getClienteSiendoAtendido();
+                ultimoClienteAtenC2.agregarEstado("En Atención Cajero 2", reloj);
+                tiempoEnCola= ultimoClienteAtenC2.CalcularTiempoEnCola(ultimoClienteAtenC2.getHoraLlegada(), reloj);
                 caj2.estado = "Ocupado";
-                if (ultimoCliente.calcularClienteB() == 4 && compra == false)
+                if (ultimoClienteAtenC2.calcularClienteB() == 4 && compra == false)
                 {
                     //calcular tipo cliente si es 3 o 4
 
@@ -244,7 +261,7 @@ namespace TPFinal
                 else
                 {
                     tipoDeClienteUltimoBC2 = "Compra Definitiva";
-                    ultimoCliente.setHoraSalida(proximaFinAtencionC2);
+                    ultimoClienteAtenC2.setHoraSalida(proximaFinAtencionC2);
                 }
             }
 
@@ -253,24 +270,24 @@ namespace TPFinal
             {
                 proximaFinCabina = reloj + Cab.TiempoEscuchandoCabina(4, 1);
                 Cab.setClienteSiendoAtendido(colaCabina.Dequeue());
-                ultimoCliente = Cab.getClienteSiendoAtendido();
-                ultimoCliente.agregarEstado("Escuchando CD en Cabina", reloj);
+                ultimoClienteCab = Cab.getClienteSiendoAtendido();
+                ultimoClienteCab.agregarEstado("Escuchando CD en Cabina", reloj);
                 
-                if (ultimoCliente.calcularClienteC() == 5)
+                if (ultimoClienteCab.calcularClienteC() == 5)
                 {
-                    colaCajeros.Enqueue(ultimoCliente);
-                    colaCajeros.Last().setGenerador(ref GeneradorUnico);
-                    ultimoCliente = colaCajeros.Last();
+                    //colaCajeros.Enqueue(ultimoCliente);
+                    //colaCajeros.Last().setGenerador(ref GeneradorUnico);
+                    //ultimoClienteCab = colaCajeros.Last();
                     //proximaFinCabina = seteoDeProximos;
                     //servicioRealizado = true;
                     //Cab.setClienteSiendoAtendido(ningunCliente);
                     tipoDeClienteUltimoC = "Compra";
-                    compra = true;
+                    //compra = true;
                 }
                 else
                 {
                     tipoDeClienteUltimoC = "No Compra";
-                    ultimoCliente.setHoraSalida(proximaFinCabina);
+                    ultimoClienteCab.setHoraSalida(proximaFinCabina);
                 }
             }
 
@@ -279,6 +296,9 @@ namespace TPFinal
             {
                 colaMax = colaCajeros.Count;
             }
+
+            prom = GeneradorUnico.convertirEnDouble(sumTiempoEnCola) / contadorDeClientes;
+            promTiempoEnCola = GeneradorUnico.convertirSegundosHorasMinutosPromedio(prom);
 
             generarVectorEstado();
             // se calcula tiempo minimo entre los proximos eventos
@@ -290,9 +310,10 @@ namespace TPFinal
                 reloj = proximaLlegadaCliente;
                 estadoSimulacion = "Llegada Cliente";
                 servicioRealizado = true;
-                ultimoCliente.agregarEstado("Llegado", reloj);
+                
                 
                 ultimoCliente = new Cliente(contadorDeClientes);
+                ultimoCliente.agregarEstado("Llegado", reloj);
                 ultimoCliente.setHoraLlegada(proximaLlegadaCliente);
                 listaClientes.Add(ultimoCliente);
 
@@ -311,8 +332,14 @@ namespace TPFinal
                 }
                 else
                 {
+                    colaMirando.Enqueue(ultimoCliente);
+                    colaMirando.Last().setGenerador(ref GeneradorUnico);
+                   //mirar.estado = "Ocupado";
+                    ultimoClienteMirando = colaMirando.Last();
+                    ultimoClienteMirando.agregarEstado("Mirando", reloj);
                     tipoDeClienteUltimoA = "Mirando";
-                    proximoFinMirar = reloj + ultimoCliente.TiempoMirando();
+                    //proximoFinMirar = reloj + ultimoCliente.TiempoMirando();
+
                 }
                 proximaLlegadaCliente = seteoDeProximos;
             }
@@ -324,18 +351,19 @@ namespace TPFinal
                 estadoSimulacion = "Fin Atención Cajero 1";
                 //caj1.estado = "Libre";
                 //proximaFinAtencionC1 = seteoDeProximos;
-                ultimoCliente.agregarEstado("Fin Atención Cajero 1", reloj);
+                ultimoClienteAtenC1.agregarEstado("Fin Atención Cajero 1", reloj);
                 servicioRealizado = true;
-                caj1.setClienteSiendoAtendido(ningunCliente);
+                //caj1.setClienteSiendoAtendido(ningunCliente);
                 //proximaFinAtencionC1 = reloj + caj1.TiempoAtencionCajero();
                 proximaFinAtencionC1 = seteoDeProximos;
                 caj1.estado = "Libre";
                 if (tipoDeClienteUltimoBC1 == "Para Escuchar")
                 {
-                    colaCabina.Enqueue(ultimoCliente);
+                    colaCabina.Enqueue(ultimoClienteAtenC1);
                     colaCabina.Last().setGenerador(ref GeneradorUnico);
                 }
                 caj1.setClienteSiendoAtendido(ningunCliente);
+                tiempoEnCola = new TimeSpan(0, 0, 0);
             }
             if (tiempoMinimo == proximaFinAtencionC2  && servicioRealizado == false)
             {
@@ -344,7 +372,7 @@ namespace TPFinal
                 estadoSimulacion = "Fin Atención Cajero 2";
                 //caj2.estado = "Libre";
                 //proximaFinAtencionC2 = seteoDeProximos;
-                ultimoCliente.agregarEstado("Fin Atención Cajero 2", reloj);
+                ultimoClienteAtenC2.agregarEstado("Fin Atención Cajero 2", reloj);
                 servicioRealizado = true;
                 //caj2.setClienteSiendoAtendido(ningunCliente);
                 //proximaFinAtencionC2 = reloj + caj2.TiempoAtencionCajero();
@@ -352,10 +380,12 @@ namespace TPFinal
                 caj2.estado = "Libre";
                 if (tipoDeClienteUltimoBC2 == "Para Escuchar")
                 {
-                    colaCabina.Enqueue(ultimoCliente);
+                    colaCabina.Enqueue(ultimoClienteAtenC2);
                     colaCabina.Last().setGenerador(ref GeneradorUnico);
                 }
                 caj2.setClienteSiendoAtendido(ningunCliente);
+                tiempoEnCola = new TimeSpan(0, 0, 0);
+
             }
 
             if (tiempoMinimo == proximaFinCabina && servicioRealizado == false)
@@ -363,20 +393,27 @@ namespace TPFinal
 
                 reloj = proximaFinCabina;
                 estadoSimulacion = "Fin Escuchando en Cabina";
-                ultimoCliente = Cab.getClienteSiendoAtendido();
-                ultimoCliente.agregarEstado("Fin Escuchando en Cabina", reloj);
+                ultimoClienteCab = Cab.getClienteSiendoAtendido();
+                ultimoClienteCab.agregarEstado("Fin Escuchando en Cabina", reloj);
                 servicioRealizado = true;
                 proximaFinCabina = seteoDeProximos;
+                if (tipoDeClienteUltimoC == "Compra")
+                {
+                    colaCajeros.Enqueue(ultimoClienteCab);
+                    colaCajeros.Last().setGenerador(ref GeneradorUnico);
+                    compra = true;
+                    //ultimoClienteCab = colaCajeros.Last();
+                }
+
             }
 
             if (tiempoMinimo == proximoFinMirar && servicioRealizado == false)
             {
                 reloj = proximoFinMirar;
+               // mirar.estado = "Libre";
                 estadoSimulacion = "Salida de Cliente Mirando";
-                ultimoCliente.setHoraSalida(reloj);
-                //Cab.getClienteSiendoAtendido().agregarEstado("Fin Escuchando en Cabina", reloj);
+                ultimoClienteMirando.setHoraSalida(reloj);
                 servicioRealizado = true;
-                //ultimoCliente = Cab.getClienteSiendoAtendido();
                 proximoFinMirar = seteoDeProximos;
             }
             sumTiempoEnCola = sumTiempoEnCola + tiempoEnCola;
@@ -385,7 +422,8 @@ namespace TPFinal
             if (contadorDeIteracionesRealizadas == (iteraciones -1))
             {
                 IteracionesCompletadas = true;
-                //promTiempoEnCola = Convert.ToInt32(sumTiempoEnCola) / contadorDeClientes;
+                prom = GeneradorUnico.convertirEnDouble(sumTiempoEnCola) / contadorDeClientes;
+                promTiempoEnCola = GeneradorUnico.convertirSegundosHorasMinutosPromedio(prom) ;
             }
             return Tuple.Create(colaMax, promTiempoEnCola);
             
@@ -480,38 +518,146 @@ namespace TPFinal
                 }
                 if (estadoSimulacion == "Salida de Cliente Mirando" || estadoSimulacion == "Fin Atención Cajero 1" || estadoSimulacion == "Fin Atención Cajero 2" || estadoSimulacion == "Fin Escuchando en Cabina")
                 {
-                    
-                    vectorEstado.Rows.Add(
-                                           reloj
-                                           , estadoSimulacion
-                                           , ultimoCliente.numeroCliente
-                                           , ""
-                                           , ""
-                                           , proximaLlegadaCliente
-                                           , proximoFinMirar
-                                           , null
-                                           , ClientesEnCola(colaCajeros)
-                                           , colaMax
-                                           , tiempoEnCola
-                                           ,""
-                                           , null
-                                           , caj1.estado
-                                           , clienteSiendoAtendidoEnC1
-                                           , caj1.getClienteSiendoAtendido().getTipoAleatorio2()
-                                           , tipoDeClienteUltimoBC1                                          
-                                           , proximaFinAtencionC1
-                                           , null
-                                           , caj2.estado
-                                           , clienteSiendoAtendidoEnC2
-                                           , caj2.getClienteSiendoAtendido().getTipoAleatorio2()
-                                           , tipoDeClienteUltimoBC2
-                                           , proximaFinAtencionC2
-                                           , null
-                                           , clienteEscuchandoCabina
-                                           , proximaFinCabina
-                                           , Cab.getClienteSiendoAtendido().getTipoAleatorio3()
-                                           , tipoDeClienteUltimoC
-                                           );
+                    if (estadoSimulacion == "Salida de Cliente Mirando" )
+                        {
+
+                        vectorEstado.Rows.Add(
+                                               reloj
+                                               , estadoSimulacion
+                                               , ultimoClienteMirando.numeroCliente
+                                               , ""
+                                               , ""
+                                               , proximaLlegadaCliente
+                                               , proximoFinMirar
+                                               , null
+                                               , ClientesEnCola(colaCajeros)
+                                               , colaMax
+                                               , tiempoEnCola
+                                               , promTiempoEnCola
+                                               , null
+                                               , caj1.estado
+                                               , clienteSiendoAtendidoEnC1
+                                               , caj1.getClienteSiendoAtendido().getTipoAleatorio2()
+                                               , tipoDeClienteUltimoBC1
+                                               , proximaFinAtencionC1
+                                               , null
+                                               , caj2.estado
+                                               , clienteSiendoAtendidoEnC2
+                                               , caj2.getClienteSiendoAtendido().getTipoAleatorio2()
+                                               , tipoDeClienteUltimoBC2
+                                               , proximaFinAtencionC2
+                                               , null
+                                               , clienteEscuchandoCabina
+                                               , proximaFinCabina
+                                               , Cab.getClienteSiendoAtendido().getTipoAleatorio3()
+                                               , tipoDeClienteUltimoC
+                                               );
+                    }
+                    if ( estadoSimulacion == "Fin Atención Cajero 1" )
+                    {
+
+                        vectorEstado.Rows.Add(
+                                               reloj
+                                               , estadoSimulacion
+                                               , ultimoClienteAtenC1.numeroCliente
+                                               , ""
+                                               , ""
+                                               , proximaLlegadaCliente
+                                               , proximoFinMirar
+                                               , null
+                                               , ClientesEnCola(colaCajeros)
+                                               , colaMax
+                                               , tiempoEnCola
+                                               , promTiempoEnCola
+                                               , null
+                                               , caj1.estado
+                                               , clienteSiendoAtendidoEnC1
+                                               , caj1.getClienteSiendoAtendido().getTipoAleatorio2()
+                                               , tipoDeClienteUltimoBC1
+                                               , proximaFinAtencionC1
+                                               , null
+                                               , caj2.estado
+                                               , clienteSiendoAtendidoEnC2
+                                               , caj2.getClienteSiendoAtendido().getTipoAleatorio2()
+                                               , tipoDeClienteUltimoBC2
+                                               , proximaFinAtencionC2
+                                               , null
+                                               , clienteEscuchandoCabina
+                                               , proximaFinCabina
+                                               , Cab.getClienteSiendoAtendido().getTipoAleatorio3()
+                                               , tipoDeClienteUltimoC
+                                               );
+                    }
+                    if ( estadoSimulacion == "Fin Atención Cajero 2" )
+                    {
+
+                        vectorEstado.Rows.Add(
+                                               reloj
+                                               , estadoSimulacion
+                                               , ultimoClienteAtenC2.numeroCliente
+                                               , ""
+                                               , ""
+                                               , proximaLlegadaCliente
+                                               , proximoFinMirar
+                                               , null
+                                               , ClientesEnCola(colaCajeros)
+                                               , colaMax
+                                               , tiempoEnCola
+                                               , promTiempoEnCola
+                                               , null
+                                               , caj1.estado
+                                               , clienteSiendoAtendidoEnC1
+                                               , caj1.getClienteSiendoAtendido().getTipoAleatorio2()
+                                               , tipoDeClienteUltimoBC1
+                                               , proximaFinAtencionC1
+                                               , null
+                                               , caj2.estado
+                                               , clienteSiendoAtendidoEnC2
+                                               , caj2.getClienteSiendoAtendido().getTipoAleatorio2()
+                                               , tipoDeClienteUltimoBC2
+                                               , proximaFinAtencionC2
+                                               , null
+                                               , clienteEscuchandoCabina
+                                               , proximaFinCabina
+                                               , Cab.getClienteSiendoAtendido().getTipoAleatorio3()
+                                               , tipoDeClienteUltimoC
+                                               );
+                    }
+                    if ( estadoSimulacion == "Fin Escuchando en Cabina")
+                    {
+
+                        vectorEstado.Rows.Add(
+                                               reloj
+                                               , estadoSimulacion
+                                               , ultimoClienteCab.numeroCliente
+                                               , ""
+                                               , ""
+                                               , proximaLlegadaCliente
+                                               , proximoFinMirar
+                                               , null
+                                               , ClientesEnCola(colaCajeros)
+                                               , colaMax
+                                               , tiempoEnCola
+                                               , promTiempoEnCola
+                                               , null
+                                               , caj1.estado
+                                               , clienteSiendoAtendidoEnC1
+                                               , caj1.getClienteSiendoAtendido().getTipoAleatorio2()
+                                               , tipoDeClienteUltimoBC1
+                                               , proximaFinAtencionC1
+                                               , null
+                                               , caj2.estado
+                                               , clienteSiendoAtendidoEnC2
+                                               , caj2.getClienteSiendoAtendido().getTipoAleatorio2()
+                                               , tipoDeClienteUltimoBC2
+                                               , proximaFinAtencionC2
+                                               , null
+                                               , clienteEscuchandoCabina
+                                               , proximaFinCabina
+                                               , Cab.getClienteSiendoAtendido().getTipoAleatorio3()
+                                               , tipoDeClienteUltimoC
+                                               );
+                    }
                 }
                 else
                 {
@@ -527,7 +673,7 @@ namespace TPFinal
                                             , ClientesEnCola(colaCajeros)
                                             , colaMax
                                             , tiempoEnCola
-                                           , ""
+                                           , promTiempoEnCola
                                             , null
                                            , caj1.estado
                                            , clienteSiendoAtendidoEnC1
@@ -550,33 +696,66 @@ namespace TPFinal
                     vectorEstado.Columns.Add("Estado Cliente " + ultimoCliente.numeroCliente);
                     vectorEstado.Columns.Add("Hora Llegada Cliente " + ultimoCliente.numeroCliente);
                     vectorEstado.Columns.Add("HoraSalida Cliente " + ultimoCliente.numeroCliente);
-
-                    //for (int i = 0; i < contadorDeClientes - 1; i++)
-                    //{
-                    //    int m = 1;
-                    //    for (int j = 26; j < vectorEstado.Columns.Count; j = j + 3)
-                    //    {
-                    //        for (int k = 0; k < ultimoCliente.conocerEstados().Item1.Count; k++)
-                    //        {
-                    //            if (Convert.ToString(reloj) == ultimoCliente.conocerEstados().Item2[k])
-                    //            {
-                    //                vectorEstado.Rows[m][j] = ultimoCliente.conocerEstados().Item1[k];
-                    //            }
-                    //            else { vectorEstado.Rows[m][j] = ""; }
-                    //        }
-
-                    //        if (reloj >= ultimoCliente.getHoraLlegada())
-                    //        { vectorEstado.Rows[m][j + 1] = ultimoCliente.getHoraLlegada(); }
-                    //        else { vectorEstado.Rows[m][j + 1] = ""; }
-
-                    //        if (reloj >= ultimoCliente.getHoraSalida())
-                    //        { vectorEstado.Rows[m][j + 2] = ultimoCliente.getHoraSalida(); }
-                    //        else { vectorEstado.Rows[m][j + 2] = ""; }
-                    //        m++;
-                    //    }
-
-                    //}
                 }
+
+                //foreach (Cliente c in listaClientes)
+                //{
+                //    for (int i = 1; i < contadorDeClientes; i++)
+                //    {
+                //        if (i == c.numeroCliente)
+                //        {
+                //            int m = 1;
+                //            for (int j = 0; j < c.conocerEstados().Item1.Count; j++)
+                //            {
+                //                if (c.conocerEstados().Item1[j] == "Llegado")
+                //                {
+                //                    vectorEstado.Rows[m][31] = c.conocerEstados().Item2[j];
+                //                    //vectorEstado.Rows[m][29] = c.conocerEstados().Item1[j];
+                //                    //vectorEstado.Rows[m][30] = c.getHoraLlegada();
+                                    
+                //                }
+                //                m++;
+                //            }
+                //        }
+                        
+                //    }
+                //}
+
+
+                //for (int i = 0; i < contadorDeClientes ; i++)
+                //{
+                //    int m = 1;
+                //    for (int d = 30; d < vectorEstado.Columns.Count; d = d + 3)
+                //    {
+                //        //for (int k = 0; k < ultimoCliente.conocerEstados().Item1.Count; k++)
+                //        //{
+                //        //    if (Convert.ToString(reloj) == ultimoCliente.conocerEstados().Item2[k])
+                //        //    {
+                //        //vectorEstado.Rows[m][j] = ultimoCliente.conocerEstados().Item1[k];
+                //        //    }
+                //        //    else { vectorEstado.Rows[m][j] = ""; }
+                //        //}
+                        
+                //        if (ultimoCliente.conocerEstados().Item1[0] == "Llegado")
+                //        {
+                //            if (reloj.ToString() == ultimoCliente.conocerEstados().Item1[0])
+                //            {
+                //                vectorEstado.Rows[m][j] = ultimoCliente.conocerEstados().Item1[0];
+                //            }
+
+                //        }
+                //        if (reloj >= ultimoCliente.getHoraLlegada())
+                //        { vectorEstado.Rows[m][j] = ultimoCliente.getHoraLlegada(); }
+                //        else { vectorEstado.Rows[m][j] = ""; }
+
+                //        //if (reloj >= ultimoCliente.getHoraSalida())
+                //        //{ vectorEstado.Rows[m][j] = ultimoCliente.getHoraSalida(); }
+                //        //else { vectorEstado.Rows[m][j+2] = ""; }
+                //        //m++;
+                //    }
+
+                //}
+
                 contadorDeIteracionesRealizadas++;
             }
         }
@@ -601,12 +780,12 @@ namespace TPFinal
 
         public DataTable cargarTablaClientes(List<Cliente> lista)
         {
-            //tablaClientes.Columns.Add("Estado de Cliente");
-            //tablaClientes.Columns.Add("Reloj");
+            tablaClientes.Columns.Add("Estado de Cliente");
+            tablaClientes.Columns.Add("Reloj");
             foreach (Cliente i in lista)
             {
-                tablaClientes.Columns.Add("Estado de Cliente " + i.numeroCliente);
-                tablaClientes.Columns.Add("Reloj "+ i.numeroCliente);
+                //tablaClientes.Columns.Add("Estado de Cliente ");
+                //tablaClientes.Columns.Add("Reloj ");
                 tablaClientes.Rows.Add("Estado de Cliente " + i.numeroCliente, "Reloj");
                 for (int j = 0; j < i.conocerEstados().Item1.Count; j++)
                 {

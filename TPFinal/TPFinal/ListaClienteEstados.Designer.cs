@@ -28,35 +28,36 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.GrillaListaCamiones = new System.Windows.Forms.DataGridView();
-            ((System.ComponentModel.ISupportInitialize)(this.GrillaListaCamiones)).BeginInit();
+            this.GrillaLista = new System.Windows.Forms.DataGridView();
+            ((System.ComponentModel.ISupportInitialize)(this.GrillaLista)).BeginInit();
             this.SuspendLayout();
             // 
-            // GrillaListaCamiones
+            // GrillaLista
             // 
-            this.GrillaListaCamiones.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.GrillaListaCamiones.Location = new System.Drawing.Point(11, 11);
-            this.GrillaListaCamiones.Margin = new System.Windows.Forms.Padding(2);
-            this.GrillaListaCamiones.Name = "GrillaListaCamiones";
-            this.GrillaListaCamiones.RowTemplate.Height = 24;
-            this.GrillaListaCamiones.Size = new System.Drawing.Size(262, 567);
-            this.GrillaListaCamiones.TabIndex = 1;
+            this.GrillaLista.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.GrillaLista.Location = new System.Drawing.Point(11, 11);
+            this.GrillaLista.Margin = new System.Windows.Forms.Padding(2);
+            this.GrillaLista.Name = "GrillaLista";
+            this.GrillaLista.RowTemplate.Height = 24;
+            this.GrillaLista.Size = new System.Drawing.Size(262, 567);
+            this.GrillaLista.TabIndex = 1;
+            this.GrillaLista.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.GrillaLista_CellClick);
             // 
             // ListaClienteEstados
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(282, 585);
-            this.Controls.Add(this.GrillaListaCamiones);
+            this.Controls.Add(this.GrillaLista);
             this.Name = "ListaClienteEstados";
             this.Text = "Lista de Cliente con sus Estados";
-            ((System.ComponentModel.ISupportInitialize)(this.GrillaListaCamiones)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.GrillaLista)).EndInit();
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private System.Windows.Forms.DataGridView GrillaListaCamiones;
+        private System.Windows.Forms.DataGridView GrillaLista;
     }
 }

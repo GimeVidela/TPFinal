@@ -18,7 +18,19 @@ namespace TPFinal
         }
         public void cargarGrilla(DataTable tablaClientes)
         {
-            GrillaListaCamiones.DataSource = tablaClientes;
+            GrillaLista.DataSource = tablaClientes;
+        }
+
+        private void GrillaListaCamiones_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            string hora = "";
+            //SimulacionAtencionEDEN sim = new SimulacionAtencionEDEN();
+            if (GrillaLista.Rows[e.RowIndex].Cells[e.ColumnIndex].Value != null)
+            {
+                GrillaLista.CurrentRow.Selected = true;
+                hora = GrillaLista.Rows[e.RowIndex].Cells["Reloj"].FormattedValue.ToString();
+            }
+            
         }
     }
 }

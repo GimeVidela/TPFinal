@@ -57,6 +57,16 @@ namespace TPFinal
                                 grillaClientes.Show();
                                 txtColaMax.Text = Convert.ToString(gestor.colaMax);
                                 txtPromCola.Text = Convert.ToString(gestor.promTiempoEnCola);
+                                TimeSpan valor = new TimeSpan(0, 2, 0);
+                               
+                                if (gestor.promTiempoEnCola > valor)
+                                {
+                                    tbxRTACajero.Text = "Si, el Tiempo Promedio de Espera en Cola " + gestor.promTiempoEnCola + " es mayor al tiempo de atención (2min).";
+                                }
+                                else
+                                {
+                                    tbxRTACajero.Text = "No, el Tiempo Promedio de Espera en Cola " + gestor.promTiempoEnCola + " es menor al tiempo de atención (2min).";
+                                }
                             }
                         }
                         else
