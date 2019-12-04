@@ -21,7 +21,7 @@ namespace TPFinal
             GrillaLista.DataSource = tablaClientes;
         }
 
-        private void GrillaListaCamiones_CellClick(object sender, DataGridViewCellEventArgs e)
+        private void GrillaLista_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             string hora = "";
             //SimulacionAtencionEDEN sim = new SimulacionAtencionEDEN();
@@ -30,7 +30,6 @@ namespace TPFinal
                 GrillaLista.CurrentRow.Selected = true;
                 hora = GrillaLista.Rows[e.RowIndex].Cells["Reloj"].FormattedValue.ToString();
             }
-            
         }
     }
 }

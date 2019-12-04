@@ -51,7 +51,9 @@
             this.txtPromCola = new System.Windows.Forms.TextBox();
             this.label11 = new System.Windows.Forms.Label();
             this.tbxRTACajero = new System.Windows.Forms.TextBox();
+            this.GrillaLista = new System.Windows.Forms.DataGridView();
             ((System.ComponentModel.ISupportInitialize)(this.grillaEstadisticas)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.GrillaLista)).BeginInit();
             this.SuspendLayout();
             // 
             // label8
@@ -178,12 +180,12 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.grillaEstadisticas.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.grillaEstadisticas.Location = new System.Drawing.Point(15, 89);
+            this.grillaEstadisticas.Location = new System.Drawing.Point(288, 89);
             this.grillaEstadisticas.Margin = new System.Windows.Forms.Padding(2);
             this.grillaEstadisticas.Name = "grillaEstadisticas";
             this.grillaEstadisticas.RowHeadersWidth = 51;
             this.grillaEstadisticas.RowTemplate.Height = 24;
-            this.grillaEstadisticas.Size = new System.Drawing.Size(1015, 519);
+            this.grillaEstadisticas.Size = new System.Drawing.Size(742, 519);
             this.grillaEstadisticas.TabIndex = 66;
             // 
             // label6
@@ -264,11 +266,25 @@
             this.tbxRTACajero.TabIndex = 75;
             this.tbxRTACajero.Text = "Rta";
             // 
+            // GrillaLista
+            // 
+            this.GrillaLista.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
+            this.GrillaLista.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.GrillaLista.Location = new System.Drawing.Point(11, 89);
+            this.GrillaLista.Margin = new System.Windows.Forms.Padding(2);
+            this.GrillaLista.Name = "GrillaLista";
+            this.GrillaLista.RowTemplate.Height = 24;
+            this.GrillaLista.Size = new System.Drawing.Size(262, 519);
+            this.GrillaLista.TabIndex = 76;
+            this.GrillaLista.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.GrillaLista_CellClick);
+            // 
             // SimulacionAtencionEDEN
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1041, 619);
+            this.Controls.Add(this.GrillaLista);
             this.Controls.Add(this.tbxRTACajero);
             this.Controls.Add(this.label11);
             this.Controls.Add(this.txtPromCola);
@@ -295,6 +311,7 @@
             this.Name = "SimulacionAtencionEDEN";
             this.Text = "Simulación Atención EDEN";
             ((System.ComponentModel.ISupportInitialize)(this.grillaEstadisticas)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.GrillaLista)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -325,5 +342,6 @@
         private System.Windows.Forms.TextBox txtPromCola;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.TextBox tbxRTACajero;
+        private System.Windows.Forms.DataGridView GrillaLista;
     }
 }

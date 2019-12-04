@@ -38,7 +38,7 @@ namespace TPFinal
 
                     if ((minu1 >= 0 && minu1 <= 60) && (segu1 >= 0 && segu1 <= 60) && (hora2 >= 0 && hora2 <= 24) && (minu2 >= 0 && minu2 <= 60) && (segu2 >= 0 && segu2 <= 60))
                     {
-                        if (iter >= 5 && iter <= 500000)
+                        if (iter >= 5 && iter <= 8000)
                         {
                             TimeSpan TiempoASimular = TimeSpan.Parse(hor1.Text + ":" + min1.Text + ":" + seg1.Text);
                             TimeSpan TiempoIniciociclos = TimeSpan.Parse(hor2.Text + ":" + min2.Text + ":" + seg2.Text);
@@ -52,9 +52,9 @@ namespace TPFinal
                             {
                                 GestorSimulacion gestor = new GestorSimulacion(Convert.ToInt32(iteraciones.Text), TiempoASimular, TiempoIniciociclos);
                                 grillaEstadisticas.DataSource = gestor.SimularVectorEstado();
-                                ListaClienteEstados grillaClientes = new ListaClienteEstados();
-                                grillaClientes.cargarGrilla(gestor.cargarTablaClientes(gestor.listaClientes));
-                                grillaClientes.Show();
+                               // ListaClienteEstados grillaClientes = new ListaClienteEstados();
+                                GrillaLista.DataSource = gestor.cargarTablaClientes(gestor.listaClientes);
+                                //grillaClientes.Show();
                                 txtColaMax.Text = Convert.ToString(gestor.colaMax);
                                 txtPromCola.Text = Convert.ToString(gestor.promTiempoEnCola);
                                 TimeSpan valor = new TimeSpan(0, 2, 0);
@@ -71,7 +71,7 @@ namespace TPFinal
                         }
                         else
                         {
-                            MessageBox.Show("La cantidad ingresada de iteraciones no es correcta. Ingrese un valor entre 5 y 500000.");
+                            MessageBox.Show("La cantidad ingresada de iteraciones no es correcta. Ingrese un valor entre 5 y 8000.");
                         }
 
                     }
@@ -85,6 +85,26 @@ namespace TPFinal
             {
                 MessageBox.Show("Ningún campo debe estar vacío");
             }
+        }
+        private void GrillaLista_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            string hora = "";
+            string reloj = ""; 
+            if (GrillaLista.Rows[e.RowIndex].Cells[e.ColumnIndex].Value != null)
+            {
+                GrillaLista.CurrentRow.Selected = true;
+                hora = GrillaLista.Rows[e.RowIndex].Cells["Reloj"].FormattedValue.ToString();
+                for (int i = 0; i < grillaEstadisticas.RowCount; i++)
+                {
+                    reloj = grillaEstadisticas.Rows[i].Cells["Reloj"].FormattedValue.ToString();
+                    if (hora == reloj)
+                    {
+                        grillaEstadisticas.Rows[i].Selected = true;
+                    }
+                }
+            }
+            
+
         }
     }
 }

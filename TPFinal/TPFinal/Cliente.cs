@@ -105,11 +105,11 @@ namespace TPFinal
 
         public int calcularClienteA()
         {
-            Thread.Sleep(11);
+            Thread.Sleep(15);
 
             this.aleatorio = Math.Round(generador.GenerarAleatorio(), 3);
             
-            if (aleatorio < 0.20)
+            if (aleatorio < 0.2)
             {
                 tipoCliente = 1; // CLiente que entra a mirar y no compra
             }

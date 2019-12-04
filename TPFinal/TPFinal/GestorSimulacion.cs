@@ -40,6 +40,7 @@ namespace TPFinal
 
         Boolean IteracionesCompletadas = false;
         Boolean compra = false;
+        Boolean mirando = false;
 
 
         DataTable vectorEstado = new DataTable();
@@ -64,6 +65,7 @@ namespace TPFinal
         string clienteSiendoAtendidoEnC1 = "";
         string clienteSiendoAtendidoEnC2 = "";
         string clienteEscuchandoCabina = "";
+        string clienteMirando = "";
 
         public List<Cliente> listaClientes = new List<Cliente>();
         Boolean servicioRealizado = false;
@@ -320,15 +322,18 @@ namespace TPFinal
                 contadorDeClientes++;
 
                 //proximaLlegadaCliente = seteoDeProximos;
+;
 
                 if (ultimoCliente.calcularClienteA() == 2)
                 {
+
                     colaCajeros.Enqueue(ultimoCliente);
                     colaCajeros.Last().setGenerador(ref GeneradorUnico);
 
                     ultimoCliente = colaCajeros.Last();
                     colaCajeros.Last().agregarEstado("En Cola Atención", reloj);
                     tipoDeClienteUltimoA = "Para Atención";
+                    
                 }
                 else
                 {
@@ -339,6 +344,7 @@ namespace TPFinal
                     ultimoClienteMirando.agregarEstado("Mirando", reloj);
                     tipoDeClienteUltimoA = "Mirando";
                     //proximoFinMirar = reloj + ultimoCliente.TiempoMirando();
+                  
 
                 }
                 proximaLlegadaCliente = seteoDeProximos;
@@ -516,6 +522,14 @@ namespace TPFinal
                 {
                     clienteEscuchandoCabina = "";
                 }
+                //if (mirar.getClienteMirando().numeroCliente != 0)
+                //{
+                //    clienteMirando = Convert.ToString(mirar.getClienteMirando().numeroCliente);
+                //}
+                //else
+                //{
+                //    clienteMirando= "";
+                //}
                 if (estadoSimulacion == "Salida de Cliente Mirando" || estadoSimulacion == "Fin Atención Cajero 1" || estadoSimulacion == "Fin Atención Cajero 2" || estadoSimulacion == "Fin Escuchando en Cabina")
                 {
                     if (estadoSimulacion == "Salida de Cliente Mirando" )
@@ -524,7 +538,7 @@ namespace TPFinal
                         vectorEstado.Rows.Add(
                                                reloj
                                                , estadoSimulacion
-                                               , ultimoClienteMirando.numeroCliente
+                                               , clienteMirando
                                                , ""
                                                , ""
                                                , proximaLlegadaCliente
@@ -693,9 +707,9 @@ namespace TPFinal
                                            , tipoDeClienteUltimoC
                                            );
 
-                    vectorEstado.Columns.Add("Estado Cliente " + ultimoCliente.numeroCliente);
-                    vectorEstado.Columns.Add("Hora Llegada Cliente " + ultimoCliente.numeroCliente);
-                    vectorEstado.Columns.Add("HoraSalida Cliente " + ultimoCliente.numeroCliente);
+                    //vectorEstado.Columns.Add("Estado Cliente " + ultimoCliente.numeroCliente);
+                    //vectorEstado.Columns.Add("Hora Llegada Cliente " + ultimoCliente.numeroCliente);
+                    //vectorEstado.Columns.Add("HoraSalida Cliente " + ultimoCliente.numeroCliente);
                 }
 
                 //foreach (Cliente c in listaClientes)
