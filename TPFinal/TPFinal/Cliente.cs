@@ -16,7 +16,7 @@ namespace TPFinal
         double aleatorio3;
         GeneradorNumAleatorios generador = new GeneradorNumAleatorios();
 
-        TimeSpan horaLlegada;
+        TimeSpan horaLlegada = new TimeSpan();
         TimeSpan horaSalida = new TimeSpan();
         //private GeneradorNumAleatorios generador;
         public string estadoActual = "";
@@ -152,6 +152,12 @@ namespace TPFinal
         {
             TimeSpan mirando = new TimeSpan(0, 3, 0);
             return mirando;
+        }
+        public TimeSpan CalcularTiempoEnCola(TimeSpan inicioCola, TimeSpan finCola)
+        {
+            TimeSpan tiempoCola = new TimeSpan();
+            tiempoCola = finCola - inicioCola;
+            return tiempoCola;
         }
     }
 }

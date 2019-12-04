@@ -52,10 +52,11 @@ namespace TPFinal
                             {
                                 GestorSimulacion gestor = new GestorSimulacion(Convert.ToInt32(iteraciones.Text), TiempoASimular, TiempoIniciociclos);
                                 grillaEstadisticas.DataSource = gestor.SimularVectorEstado();
-                                //ListaClienteEstados grillaClientes = new ListaClienteEstados();
-                                //grillaClientes.cargarGrilla(gestor.cargarTablaClientes(gestor.listaClientes));
-                                //grillaClientes.Show();
+                                ListaClienteEstados grillaClientes = new ListaClienteEstados();
+                                grillaClientes.cargarGrilla(gestor.cargarTablaClientes(gestor.listaClientes));
+                                grillaClientes.Show();
                                 txtColaMax.Text = Convert.ToString(gestor.colaMax);
+                                txtPromCola.Text = Convert.ToString(gestor.promTiempoEnCola);
                             }
                         }
                         else

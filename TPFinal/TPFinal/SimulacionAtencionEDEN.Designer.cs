@@ -47,6 +47,8 @@
             this.seg1 = new System.Windows.Forms.TextBox();
             this.min1 = new System.Windows.Forms.TextBox();
             this.hor1 = new System.Windows.Forms.TextBox();
+            this.label10 = new System.Windows.Forms.Label();
+            this.txtPromCola = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.grillaEstadisticas)).BeginInit();
             this.SuspendLayout();
             // 
@@ -226,11 +228,30 @@
             this.hor1.Size = new System.Drawing.Size(19, 20);
             this.hor1.TabIndex = 52;
             // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(203, 67);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(182, 13);
+            this.label10.TabIndex = 72;
+            this.label10.Text = "Tiempo Promedio de Espera en Cola:";
+            // 
+            // txtPromCola
+            // 
+            this.txtPromCola.Location = new System.Drawing.Point(391, 64);
+            this.txtPromCola.Name = "txtPromCola";
+            this.txtPromCola.Size = new System.Drawing.Size(100, 20);
+            this.txtPromCola.TabIndex = 73;
+            this.txtPromCola.Text = "Prom.";
+            // 
             // SimulacionAtencionEDEN
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1041, 619);
+            this.Controls.Add(this.txtPromCola);
+            this.Controls.Add(this.label10);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.seg1);
@@ -279,5 +300,7 @@
         private System.Windows.Forms.TextBox seg1;
         private System.Windows.Forms.TextBox min1;
         private System.Windows.Forms.TextBox hor1;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.TextBox txtPromCola;
     }
 }
